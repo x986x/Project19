@@ -1,20 +1,23 @@
-from django.core.management.base import BaseCommand
-import json
+from django.core.management import BaseCommand, call_command
+from django.db import IntegrityError
+import os
+from django.conf import settings
 from catalog import models
 
+from catalog.models import Product
+
 class Command(BaseCommand):
+    help = 'Load data from fixtures into the database'
+
     def handle(self, *args, **options):
-        # Очистка базы данных от старых данных
         models.Category.objects.all().delete()
+        category_fixture_path = os.path.join(settings.BASE_DIR, 'catalog', 'fixtures', 'category.json')
+        product_fixture_path = os.path.join(settings.BASE_DIR, 'catalog', 'fixtures', 'products.json')
 
-        with open('catalog/fixtures/category.json') as file:
-            info_category = json.load(file)
-
-        info_str = []
-        for data in info_category:
-            info_str.append(models.Category(**data["fields"]))
-
-        # Добавление новых данных в базу данных
-        models.Category.objects.bulk_create(info_str)
-
-        self.stdout.write(self.style.SUCCESS('Successfully populated the database'))
+        try:
+            call_command('loaddata', category_fixture_path)
+            call_command('loaddata', product_fixture_path)
+        except IntegrityError as e:
+            self.stdout.write(self.style.ERROR(f'Invalid fixtures: {e}'))
+        else:
+            self.stdout.write(self.style.SUCCESS('OK'))
