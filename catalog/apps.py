@@ -7,5 +7,6 @@ class CatalogConfig(AppConfig):
     name = 'catalog'
 
     def ready(self):
+        # Используйте simple_tag для регистрации вашего тега
         register = Library()
         register.simple_tag(my_tags.my_custom_tag)
