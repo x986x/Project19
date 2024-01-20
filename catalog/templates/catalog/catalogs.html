@@ -1,9 +1,9 @@
 {% extends 'catalog/base.html' %}
-{% load my_tags %}
+{% load static %}
 {% block inc_title %}
-    {% include 'catalog/include/inc_title.html' %}
+{% include 'catalog/include/inc_title.html'%}
 {% endblock %}
-
+{% load my_tags %}
 {% block container %}
     <div class="row text-center">
         {% for product in products %}
@@ -11,7 +11,7 @@
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal">{{ product.fields.name }}</h4>
-                        {% my_custom_tag product.fields.photo %}
+                        <img src="{% my_custom_tag product.fields.photo %}" style="width: 100px; height: 100px">
                     </div>
                     <div class="card-body">
                         <h1 class="card-title pricing-card-title">{{ product.fields.unit_price }}</h1>
