@@ -1,5 +1,5 @@
 {% extends 'catalog/base.html' %}
-
+{% load my_tags %}
 {% block inc_title %}
 {% include 'catalog/include/inc_title.html'%}
 {% endblock %}
@@ -10,9 +10,9 @@
       <div class="col-md-12 ">
         <div class="card mt-5">
           <div class="card-body">
-            <h5 class="card-title">Название товара: корпус</h5>
-            <p class="card-text">Стоимость товара: 1000 рублей</p>
-            <p class="card-text">Описание товара: Тихий</p>
+            <h5 class="card-title">Название товара: {{ product.fields.name }}</h5>
+            <p class="card-text">Стоимость товара: {{ product.fields.unit_price }}</p>
+            <p class="card-text">Описание товара: {{ product.fields.message }}</p>
           </div>
         </div>
       </div>

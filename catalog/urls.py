@@ -8,7 +8,8 @@ from catalog import views
 
 urlpatterns = [
     path('', views.index),
+    path ('base/', views.index),
     path('contacts/', views.contacts),
-    path ('products/', views.info_products),
+    path('products/<int:product_id>/', views.info_products),
     path ('catalogs/', views.catalogs)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

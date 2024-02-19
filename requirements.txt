@@ -4,3 +4,4 @@ asgiref==3.7.2
 psycopg2==2.9.9
 psycopg2-binary==2.9.9
 Pillow==9.4.0
+Django version 4.2.6
