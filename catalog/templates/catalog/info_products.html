@@ -10,10 +10,10 @@
       <div class="col-md-12 ">
         <div class="card mt-5">
           <div class="card-body">
-            <img src="{% my_custom_tag product.fields.photo %}" style="width: 100px; height: 100px">
-            <h5 class="card-title">Название товара: {{ product.fields.name }}</h5>
-            <p class="card-text">Стоимость товара: {{ product.fields.unit_price }}</p>
-            <p class="card-text">Описание товара: {{ product.fields.message }}</p>
+             <img src="{% my_custom_tag product.photo.url %}" style="width: 100px; height: 100px">
+            <h5 class="card-title">Название товара: {{ product.name }}</h5>
+            <p class="card-text">Стоимость товара: {{ product.unit_price }}</p>
+            <p class="card-text">Описание товара: {{ product.message }}</p>
           </div>
         </div>
       </div>
