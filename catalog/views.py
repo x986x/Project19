@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from .models import Product
 
 
-def index(request):
-    products = Product.objects.all()
-    return render(request, 'catalog/index.html', {'products': products})
+class IndexListView(ListView):
+    model = Product
+    template_name = 'catalog/index.html'
+    context_object_name = 'products'
 
 
 def contacts(request):
@@ -12,14 +14,12 @@ def contacts(request):
     return render(request, 'catalog/contacts.html')
 
 
-def info_products(request, product_id):
-    try:
-        product = Product.objects.get(pk=product_id)
-        return render(request, 'catalog/info_products.html', {'product': product})
-    except Product.DoesNotExist:
-        return HttpResponseNotFound('Product not found')
+class ProductsDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/info_products.html'
 
 
-def catalogs(request):
-    products = Product.objects.all()
-    return render(request, 'catalog/catalogs.html', {'products': products})
+class CatalogsListView(ListView):
+    model = Product
+    template_name = 'catalog/index.html'
+    context_object_name = 'products'

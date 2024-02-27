@@ -1,9 +1,9 @@
 from django.db import models
 
+
 class Category(models.Model):
     name_category = models.CharField(max_length=40)
     message_category = models.TextField()
-
 
 
 class Product(models.Model):
@@ -15,4 +15,3 @@ class Product(models.Model):
     date_of_creation = models.DateTimeField(auto_now_add=True)
     last_modified_date = models.DateTimeField(auto_now=True)
     #created_at=models.TextField(default='none' )
-
