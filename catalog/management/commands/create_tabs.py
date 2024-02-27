@@ -6,6 +6,7 @@ from catalog import models
 
 from catalog.models import Product
 
+
 class Command(BaseCommand):
     help = 'Load data from fixtures into the database'
 

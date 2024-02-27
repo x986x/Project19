@@ -4,12 +4,12 @@ from django.shortcuts import render
 from django.http import HttpResponseNotFound
 import json
 
+
 def index(request):
     products_file_path = os.path.join(settings.BASE_DIR, 'media', 'products.json')
     with open(products_file_path, 'r', encoding='utf-8') as file:
         products = json.load(file)
     return render(request, 'catalog/catalogs.html', {'products': products})
-
 
 
 def contacts(request):
