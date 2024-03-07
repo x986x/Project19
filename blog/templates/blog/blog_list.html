@@ -1,0 +1,32 @@
+{% extends 'catalog/base.html' %}
+{% block content%}
+<div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить блоговую запись</a>
+</div>
+{% for object in object_list %}
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+
+        <div class="card-body">
+            <p class="card-text">
+                {{object|title}}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'blog:view' object.pk %}" class="btn btn-sm btn-outline-secondary">Просмотр</a>
+                    <a href="{% url 'blog:edit' object.pk %}"
+                       class="btn btn-sm btn-outline-secondary">Редактирование</a>
+                    <a href="{% url 'blog:delete' object.pk %}" class="btn btn-sm btn-outline-secondary">Удаление</a>
+                </div>
+                {% if object.is_published %}
+                <a class="btn btn-warning" href="{% url 'blog:toogle_activity' object.pk %}">Деактивировать</a>
+                {% else %}
+                <a class="btn btn-success" href="{% url 'blog:toogle_activity' object.pk %}">Активировать</a>
+                {% endif%}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock%}
