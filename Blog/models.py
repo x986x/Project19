@@ -1,7 +1,8 @@
 from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
-# Create your models here.
+
+
 class Blog(models.Model):
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     slug = models.CharField(max_length=150, verbose_name='slug', **NULLABLE)
@@ -13,7 +14,3 @@ class Blog(models.Model):
 
     def __str__(self):
         return f'{self.title}'
-
-    class Meta:
-        verbose_name = 'блоговая запись'
-        verbose_name_plural = 'блоговые записи'

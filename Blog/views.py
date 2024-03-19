@@ -3,14 +3,14 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
 
-from blog.models import Blog
+from Blog.models import Blog
 
 
-# Create your views here.
 class BlogCreateView(CreateView):
     model = Blog
+    template_name = 'Blog/blog_form.html'
     fields = ('title', 'body', 'preview', 'date_of_creation',)
-    success_url = reverse_lazy('blog:list')
+    success_url = reverse_lazy('Blog:list')
 
     def form_valid(self, form):
         if form.is_valid():
@@ -22,7 +22,7 @@ class BlogCreateView(CreateView):
 
 class BlogListView(ListView):
     model = Blog
-
+    template_name = 'Blog/blog_list.html'
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
         queryset = queryset.filter(is_published=True)
@@ -31,7 +31,7 @@ class BlogListView(ListView):
 
 class BlogDetailView(DetailView):
     model = Blog
-
+    template_name = 'Blog/blog_detail.html'
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
         self.object.views_count += 1
@@ -52,12 +52,13 @@ class BlogUpdateView(UpdateView):
             return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('blog:view', args=[self.kwargs.get('pk')])
+        return reverse('Blog:view', args=[self.kwargs.get('pk')])
 
 
 class BlogDeleteView(DeleteView):
     model = Blog
-    success_url = reverse_lazy('blog:list')
+    template_name = 'Blog/blog_confirm_delete.html'
+    success_url = reverse_lazy('Blog:list')
 
 
 def toogle_activity(request, pk):
@@ -67,4 +68,4 @@ def toogle_activity(request, pk):
     else:
         blog_item.is_published = True
     blog_item.save()
-    return redirect('blog:list')
+    return redirect('Blog:list')
