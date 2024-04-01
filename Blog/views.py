@@ -22,6 +22,10 @@ class BlogCreateView(CreateView):
 
 class BlogListView(ListView):
     model = Blog
+    extra_context = {
+        'title': " Блог",
+    }
+
     template_name = 'Blog/blog_list.html'
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
@@ -42,7 +46,7 @@ class BlogDetailView(DetailView):
 class BlogUpdateView(UpdateView):
     model = Blog
     fields = ('title', 'body', 'preview', 'date_of_creation',)
-    success_url = reverse_lazy('blog:list')
+    success_url = reverse_lazy('Blog:list')
 
     def form_valid(self, form):
         if form.is_valid():

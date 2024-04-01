@@ -1,17 +1,23 @@
-from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import path
-from catalog.apps import CatalogConfig
-from catalog import views
 
-from catalog.views import IndexListView, ProductsDetailView, CatalogsListView
+from catalog.apps import CatalogConfig
+from catalog.views import contacts, ProductListView, HomeView, ProductCreateView, ProductDetailView, ProductUpdateView, \
+    ProductDeleteView, version_active
 
 app_name = CatalogConfig.name
 
 urlpatterns = [
-    path('', IndexListView.as_view(), name='index'),
-    path('base/', IndexListView.as_view(), name='index'),
-    path('contacts/', views.contacts),
-    path('products/<int:pk>/', ProductsDetailView.as_view(), name='product-detail'),
-    path('catalogs/', CatalogsListView.as_view(), name='catalogs'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # path('', home),
+    path('', HomeView.as_view(), name='home'),
+    path('contacts/', contacts),
+    # path('home/', home),
+    # path('home/', HomeView.as_view()),
+    # path('<int:pk>/product', product, name='product'),
+    path('<int:pk>/product/', ProductListView.as_view(), name='product'),
+    path('<int:pk>/view/', ProductDetailView.as_view(), name='view_product'),
+    path('create/', ProductCreateView.as_view(), name='create_product'),
+    path('update/<int:pk>/', ProductUpdateView.as_view(), name='update_product'),
+    path('delete/<int:pk>/', ProductDeleteView.as_view(), name='delete_product'),
+    path('version/<int:pk>/', version_active, name='version_active'),
+
+]

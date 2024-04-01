@@ -1,5 +1,11 @@
 {% extends 'catalog/base.html' %}
-{% block container %}
+
+{% block content %}
+<!--<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">-->
+<!--    <h1 class="display-4">Контакты</h1>-->
+<!--</div>-->
+
+<div class="container">
     <div class="row text-start">
         <div class="col-lg-9 col-md-6 col-sm-12">
             <div class="card mb-4 box-shadow">
@@ -31,21 +37,32 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="name">Имя</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя" required>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя"
+                                   required>
                         </div>
                         <div class="mb-3">
                             <label for="phone">Телефон</label>
-                            <input type="text" name="phone" class="form-control" id="phone" placeholder="Контактный телефон" required>
+                            <input type="text" name="phone" class="form-control" id="phone"
+                                   placeholder="Контактный телефон" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">email</label>
+                            <input type="email" name="email" class="form-control" id="email"
+                                   placeholder="Контактный email" required>
                         </div>
                         <div class="mb-3">
                             <label for="message">Сообщение</label>
-                            <textarea type="text" name="message" class="form-control" id="message" placeholder="Контактный телефон" required></textarea>
+                            <textarea name="message" class="form-control" id="message" placeholder="Ваше сообщение"
+                                      required></textarea>
                         </div>
+                        <!--                    </form>-->
+                        <!--                    <input type="submit">-->
+                        <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Отправить</button>
+                        <!--                  <br>-->
                     </form>
-                    <input type="submit">
-                    <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Отправить</button>
+
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
