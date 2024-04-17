@@ -13,8 +13,7 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = '__all__'
-        fields = ['name', 'description', 'image', 'category', 'price', 'date_of_creation', 'last_modified_date']
+        exclude = ('owner',)
 
     def clean_title(self):
         cleaned_data = self.cleaned_data['title'].lower()
