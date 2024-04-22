@@ -3,15 +3,19 @@
 {% block content %}
 
     <div class="container">
-        <div class="col-12 mb-5">
-        {% if user.is_authenticated %}
-            <a class="btn btn-outline-primary" href="{% url 'catalog:create_product'%}">Добавить продукт </a>
-        </div>
-        {% endif %}
+        {% if user.is_staff or user.is_superuser or user.is_active %}
+            <div class="col-12 mb-5">
+                <a class="btn btn-outline-primary" href="{% url 'catalog:create_product'%}">Добавить продукт</a>
+            </div>
+        {% endif%}
         <div class="row text-center">
             {% for object in object_list %}
-            {% include 'catalog/includes/inc_product.html' with object=object %}
+
+                {% include 'catalog/includes/inc_product.html' with object=object %}
+
             {% endfor %}
         </div>
         {% endblock %}
     </div>
+
+

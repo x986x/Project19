@@ -154,5 +154,5 @@ LOGOUT_REDIRECT_URL = '/'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'ВАША ПОЧТА'
-EMAIL_HOST_PASSWORD = 'ВАШ ПАРОЛЬ'
+EMAIL_HOST_USER = 'lepyanske@yandex.ru'
+EMAIL_HOST_PASSWORD = 'Qwerty11trewq'

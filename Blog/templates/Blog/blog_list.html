@@ -17,6 +17,7 @@
                 <div class="btn-group">
                     <a href="{% url 'Blog:view' object.pk %}" class="btn btn-sm btn-outline-secondary">Просмотр</a>
                     <a href="{% url 'Blog:edit' object.pk %}"
+                        {% if object.owner == request.user or user.is_superuser %}
                        class="btn btn-sm btn-outline-secondary">Редактирование</a>
                     <a href="{% url 'Blog:delete' object.pk %}" class="btn btn-sm btn-outline-secondary">Удаление</a>
                 </div>
@@ -24,6 +25,7 @@
                 <a class="btn btn-warning" href="{% url 'Blog:toogle_activity' object.pk %}">Деактивировать</a>
                 {% else %}
                 <a class="btn btn-success" href="{% url 'Blog:toogle_activity' object.pk %}">Активировать</a>
+                        {% endif %}
                 {% endif%}
             </div>
         </div>
