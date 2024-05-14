@@ -6,6 +6,7 @@
 
     <div class="card mb-4 box-shadow">
         {% for object in object_list %}
+        {% if user.is_staff or user.is_superuser or user.is_active %}
         <div class="card-header">
             <h4 class="my-0 font-weight-normal">Цена: {{object.price}} руб</h4>
         </div>
@@ -21,11 +22,11 @@
                      src="{{ object.image|mymedia }}"
                      alt="Card image cap">
             </ul>
-        {% if perms.catalog.view_product %}
+            {% if perms.catalog.view_product %}
             <a href="{% url 'catalog:view_product' object.pk %}" type="button"
                class="btn btn-lg btn-block btn-outline-primary">view</a>
-        {% endif %}
-        {% if user.is_staff or user.is_superuser or user.is_active %}
+            {% endif %}
+
 
             {% if object.owner == request.user or user.is_superuser or user.is_staff %}
                 <a href="{% url 'catalog:update_product' object.pk %}" type="button"
@@ -39,6 +40,8 @@
 
              <a href="{% url 'catalog:version_active' object.pk %}" type="button"
                class="btn btn-lg btn-block btn-outline-primary">version_active</a>
+
+
 
         </div>
         {% endif %}

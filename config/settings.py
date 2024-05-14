@@ -137,15 +137,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 AUTH_USER_MODEL = 'users.USER'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # AUTH_PASSWORD_VALIDATORS
-# с задачи лодок
 
 # if DEBUG:
 #     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -154,5 +151,5 @@ LOGOUT_REDIRECT_URL = '/'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'lepyanske@yandex.ru'
-EMAIL_HOST_PASSWORD = 'Qwerty11trewq'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''

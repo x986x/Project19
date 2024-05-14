@@ -1,4 +1,5 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -63,7 +64,7 @@ class ProductListView(ListView):
         return queryset
 
 
-class ProductDetailView(DetailView, PermissionRequiredMixin):
+class ProductDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Product
     permission_required = 'catalog.view_product'
 
@@ -73,7 +74,7 @@ class ProductDetailView(DetailView, PermissionRequiredMixin):
         return queryset
 
 
-class ProductCreateView(CreateView, PermissionRequiredMixin):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
@@ -87,11 +88,11 @@ class ProductCreateView(CreateView, PermissionRequiredMixin):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView, PermissionRequiredMixin):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
-    success_url = reverse_lazy('catalog:home')
     permission_required = 'catalog.change_product'
+    success_url = reverse_lazy('catalog:home')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -116,13 +117,13 @@ class ProductUpdateView(UpdateView, PermissionRequiredMixin):
         return super().form_valid(form)
 
 
-class ProductDeleteView(DeleteView, PermissionRequiredMixin):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
-    success_url = reverse_lazy('catalog:home')
     permission_required = 'catalog.delete_product'
+    success_url = reverse_lazy('catalog:home')
 
 
-# @permission_required('catalog.view_version')
+#@permission_required('catalog.view_version')
 def version_active(request, pk):
 
     context = {
