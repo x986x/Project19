@@ -1,0 +1,14 @@
+1)python3 manage.py flush
+(для полного сноса бд)
+2)python3 manage.py csu
+(выдача прав админа)
+3)python3 manage.py loaddata groups_fixture.json
+(загрузка фикстуры с группами)
+4)python3 manage.py create_tabs
+(загрузка фикстур с таблицами)
+5)python3 manage.py add_users_to_group
+(команда на добавление модератора)
+6)python3 manage.py add_users_to_login_group
+(команда на добавление зарегистрированного пользователя)
+7)python3 manage.py runserver
+(запуск сервера)

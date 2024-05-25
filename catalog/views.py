@@ -122,6 +122,11 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     permission_required = 'catalog.delete_product'
     success_url = reverse_lazy('catalog:home')
 
+    def has_permission(self):
+        """Override to check for custom permissions"""
+        obj = self.get_object()
+        return super().has_permission() and (self.request.user == obj.owner or self.request.user.is_superuser or self.request.user.is_staff)
+
 
 #@permission_required('catalog.view_version')
 def version_active(request, pk):
